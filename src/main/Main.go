@@ -36,7 +36,7 @@ func help() {
 }
 
 func main() {
-	if(1==1){
+	if(1==2){
 		gps2enuMain()
 		testGga2Enu()
 		return
