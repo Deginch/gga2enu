@@ -68,7 +68,7 @@ var qualityMap = map[int]int{
 func (gga GGA) toENU(lat float64, lon float64, height float64) (ENU, error) {
 	var enu ENU;
 	//region 默认数据
-	enu.date=fmt.Sprintf("%s %s:%s:%s",time.Now().Format("2006-01-02"),gga.utc[:2],gga.utc[2:4],gga.utc[4:])
+	enu.date=fmt.Sprintf("%s %s:%s:%s",time.Now().Format("2006/01/02"),gga.utc[:2],gga.utc[2:4],gga.utc[4:])
 	enu.quality = gga.quality
 	enu.satelliteNum = gga.satelliteNum
 	enu.jetLag = 0
@@ -92,7 +92,8 @@ func (gga GGA) toENU(lat float64, lon float64, height float64) (ENU, error) {
 	//endregion
 	//region 处理经纬高
 	var err error;
-	enu.east, enu.north, enu.up = calGps2Enu(lat,lon,height,gga.lat,gga.lon,gga.xHeight+gga.height)
+	enu.east, enu.north, _ = calGps2Enu(lat,lon,height,gga.lat,gga.lon,gga.xHeight+gga.height)
+	enu.up=gga.xHeight+gga.height-height
 	if err != nil {
 		return enu, err
 	}
