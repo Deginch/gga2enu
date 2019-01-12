@@ -92,8 +92,7 @@ func (gga GGA) toENU(lat float64, lon float64, height float64) (ENU, error) {
 	//endregion
 	//region 处理经纬高
 	var err error;
-	enu.east, enu.north, _ = calGps2Enu(lat,lon,height,gga.lat,gga.lon,gga.xHeight+gga.height)
-	enu.up=gga.xHeight+gga.height-height
+	enu.east, enu.north, enu.up = calGps2Enu(lat,lon,height,gga.lat,gga.lon,gga.xHeight+gga.height)
 	if err != nil {
 		return enu, err
 	}

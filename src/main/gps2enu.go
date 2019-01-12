@@ -62,10 +62,11 @@ func calEnu(Er [][]float64, rECEF []float64, rR []float64) (float64,float64,floa
 }
 
 func calGps2Enu(rlat float64, rlon float64, rh float64, llat float64, llon float64, lh float64) (float64,float64,float64) {
-	rECEF := calRr(angle2R(llat), angle2R(llon), lh)
+	rECEF := calRr(angle2R(llat), angle2R(llon), rh)
 	rR := calRr(angle2R(rlat), angle2R(rlon), rh)
 	Er:=calEr(angle2R(rlat),angle2R(rlon))
-	return calEnu(Er, rECEF, rR)
+	e,n,_:=calEnu(Er,rECEF,rR)
+	return e,n,rh-lh
 }
 
 func gps2enuMain() {
